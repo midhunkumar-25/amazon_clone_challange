@@ -51,20 +51,20 @@ export default function Header() {
                 </button>
             </form>
             <div className='header__nav'>
-                <Link to= { !user && '/login'}>
+                <Link to= { !user && '/login'} style={{ textDecoration: 'none' }}>
                 <div className='header__option' onClick={handleAuthenticaton}>
                     
-                    <span className='header__line1'>Hello, {!user ? 'Guest' : user.email }</span>
+                    <span className='header__line1'>Hello, {!user ? 'Guest' : ( !user.displayName ? user.email : user.displayName ) }</span>
                     <span className='header__line2'>{user ? 'Sign Out' : 'Sign In'}</span>
                 </div>
                 </Link>
-                <Link to='/orders'>
+                <Link to='/orders' style={{ textDecoration: 'none' }}>
                 <div className='header__option'>
                     <span className='header__line1'>Returns</span>
                     <span className='header__line2'>& Orders</span>
                 </div>
                 </Link>
-                <Link to='/checkout'>
+                <Link to='/checkout' style={{ textDecoration: 'none' }}>
                 <div className='header__optionBasket'>
                 <ShoppingCartOutlinedIcon/>
                     <span className='header__basketCount'>{basket.length} </span>

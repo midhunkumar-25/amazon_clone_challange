@@ -1,0 +1,14 @@
+.Account{
+    display: flex;
+    flex-direction: column;
+}
+.Account__title {
+    margin-left: 8rem;
+    margin-top: 1rem;
+}
+.Account__card__container{
+    margin: 8rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}

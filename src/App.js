@@ -18,6 +18,10 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Orders from './components/Orders';
+import Account from './components/Account';
+import Subheader from './components/Subheader';
+import Profile from './components/Profile';
+import Signup from './components/Signup';
 
 const promise = loadStripe(
   "pk_test_51K0LO4SGz5bkUNbUWbVdk8EcaeZAaY9l4cBHA5oWzGsCDfZN5YlAML66n7BvJ1pM0yB7J95UqFMJ86VPNUJVjmH000ghcsavBb"
@@ -31,16 +35,13 @@ function App() {
       if (user) {
         dispatch({
           type:"ADD_USER",
-          item: {
-              uid:user.uid,
-              email: user.email,
-            },
+          item: user
       });
 
       } else {
         dispatch({
           type: "ADD_USER",
-          user: null,
+          item: null,
         });
       }
     });
@@ -53,17 +54,22 @@ function App() {
         <Route  path='/checkout' element={
                     <React.Fragment>
                     <Header/>
+                    <Subheader/>
                     <Checkout/>
                   </React.Fragment>}/>
 
         <Route  path='/' element={                    
                   <React.Fragment>
                     <Header/>
+                    <Subheader/>
                     <Home/>
                   </React.Fragment>} />
         <Route path="/login" element={<Login />}/>
-        {<Route path="/payment" element={<React.Fragment> <Header /> <Elements stripe={promise}><Payment /></Elements></React.Fragment>}/>}
-        {<Route path="/orders" element={<React.Fragment><Header /><Orders /></React.Fragment>}/>}
+        {<Route path="/payment" element={<React.Fragment> <Header /><Subheader/> <Elements stripe={promise}><Payment /></Elements></React.Fragment>}/>}
+        {<Route path="/orders" element={<React.Fragment><Header /><Subheader/><Orders /></React.Fragment>}/>}
+        {<Route path="/account" element={<React.Fragment><Header /><Subheader/><Account /></React.Fragment>}/>}
+        {<Route path="/profile" element={<React.Fragment><Header /><Subheader/><Profile /></React.Fragment>}/>}
+        {<Route path="/register" element={<React.Fragment><Header /><Subheader/><Signup /></React.Fragment>}/>}
       </Routes>
       </div>
     </Router>

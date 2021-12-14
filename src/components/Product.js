@@ -25,11 +25,20 @@ export default function Product({id,title,image,price,rating}) {
                 <strong>{price}</strong>
             </p>
             <div className="product__rating">
-          {Array(Math.round(parseFloat(rating)))
+        {Array(Math.round(parseFloat(rating)))
             .fill()
             .map((_, i) => (
                 <p>&#11088;</p>
-            ))}
+            ))
+
+            }
+        {Array(5 - Math.round(parseFloat(rating)))
+            .fill()
+            .map((_, i) => (
+                <p style={{fontSize:"23px",marginBottom:"8px"}}>&#9734;</p>
+            ))
+
+            }
             </div>
             </div>
             <img src={image} alt=""/>

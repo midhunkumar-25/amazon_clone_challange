@@ -1,0 +1,94 @@
+.sub_header{
+    position: relative;
+    height:35px;
+    display: flex;
+    align-items: center;
+    background-color: #252e3b;
+    top:0;
+    z-index: 100;
+}
+.subheader__Icon{
+    cursor: pointer;
+    color: white;
+    margin-left: 1rem;
+    border-radius: 5px;
+    padding: 5px;
+    height: 60px !important;
+    width: 50px !important;
+}
+.subheader__Icon:hover{
+    border-radius: 5px;
+    border:1px solid white;
+}
+.menubar{
+    background-color: white;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    position: fixed;
+    top:0;
+    transition: 850ms;
+    left: -100%;
+}
+.menubar.active{
+    left:0;
+    transition: 350ms;
+}
+
+
+.menuheader{
+    display: flex;
+    width:100%;
+    height: 3.5 rem;
+    color: white;
+    justify-content: space-between;
+    background-color: #252e3b;
+}
+.menuheader >p{
+    margin-top: 1rem;
+font-weight: bolder;
+}
+.menubody{
+    display: flex;
+    overflow: scroll;
+}
+.menuitem{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+
+}
+.menucontainer{
+    border-bottom: solid 1px lightgrey;
+    text-decoration: none;
+
+}
+.menutile{
+    color:black;
+    font-weight: bold;
+    font-size: 1.5 rem;
+    text-decoration: none;
+    width:95%;
+    height:2rem;
+    display:flex;
+    align-items: center;  
+    margin: 5px; 
+    
+}
+
+.menutext{
+    color:black;
+    text-decoration: none;
+    font-size: 1 rem;
+    width:95%;
+    height:2rem;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 5px; 
+}
+.menutext:hover{
+    background-color: lightgrey;
+}

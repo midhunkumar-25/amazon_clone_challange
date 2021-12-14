@@ -9,6 +9,7 @@
 }
 
 .checkoutProduct__info > button {
+    border-radius: 4px;
     background: #f0c14b;
     border: 1px solid;
     margin-top: 10px;

@@ -5,7 +5,8 @@ export const StateContext = createContext();
 
 // Wrap our app and provide the Data layer
 export const StateProvider = ({ reducer, initialState, children }) => { 
-  const [{basket,homeProducts,user},dispatch] =useReducer(reducer, initialState,()=>{
+
+  /*,()=>{
     const localData= localStorage.getItem("user")
     return localData ?  {
       basket: [],
@@ -15,10 +16,10 @@ export const StateProvider = ({ reducer, initialState, children }) => {
   });
   useEffect(() => {
     localStorage.setItem("user",JSON.stringify(user)) 
-  }, [user])
+  }, [user])*/
   return(
 
-  <StateContext.Provider value={[{basket,homeProducts,user},dispatch]}>
+  <StateContext.Provider value={useReducer(reducer, initialState)}>
     {children}
   </StateContext.Provider>
 )};
