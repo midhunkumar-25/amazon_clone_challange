@@ -5,7 +5,9 @@ import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile ,updatePhoneNumber } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc  } from "firebase/firestore"; 
+const db = getFirestore();
 export default function Signup() {
     const [{ user }, dispatch] = useStateValue();
     const [email, setEmail] = useState('');
@@ -17,8 +19,8 @@ export default function Signup() {
         event.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = auth.currentUser;
-            updateProfile(user, {
+            let user_auth = auth.currentUser;
+            updateProfile(user_auth, {
                 displayName: name
               }).then(() => {
                 // Profile name updated!
@@ -26,15 +28,25 @@ export default function Signup() {
               }).catch((error) => {
                 console.log(error)
               });
+              setDoc(doc(db,"users",user_auth?.uid),{phoneNumber : phone})
             // Signed up
-            const user = userCredential.user;
+            let user = userCredential.user;
             dispatch({
                 type:"ADD_USER",
                 item: user,
             });
             // ...
+            setName("")
+            setPhone("")
+            setEmail("")
+            setPassword("")
+            navigate('/')
         })
         .catch((error) => {
+            setName("")
+            setPhone("")
+            setEmail("")
+            setPassword("")
             const errorCode = error.code;
             const errorMessage = error.message;
             alert(errorMessage)
@@ -53,10 +65,10 @@ export default function Signup() {
                 <h1>Create Account</h1>
                 <form onSubmit={signup}>
                     <h5>Your name</h5>
-                    <input type='text' value={email} onChange={e => setName(e.target.value)} />
+                    <input type='text' value={name} onChange={e => setName(e.target.value)} />
 
                     <h5>Mobile number</h5>
-                    <input type='number' value={password} onChange={e => setPhone(e.target.value)} />
+                    <input type='text' value={phone} onChange={e => setPhone(e.target.value)} />
                     <h5>Email</h5>
                     <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
 

@@ -34,28 +34,7 @@ function Login() {
             alert(errorMessage)
           });
     }
-    const signup = (event)=>{
-        event.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            dispatch({
-                type:"ADD_USER",
-                item: {
-                    uid:user.uid,
-                    email: user.email,
-                  },
-            });
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
-            // ..
-        });    
-    }
+
     return(
         <div className='login'>
             <Link to='/'>
@@ -78,7 +57,10 @@ function Login() {
                 <div className="login__divider">
                     <h5>New to Amazon?</h5>
                 </div>
-                <button onClick={signup} className='login__registerButton'>Create your Amazon Account</button>
+                <Link to='/register' style={{ textDecoration: 'none' }}>
+                    <button  className='login__registerButton'>Create your Amazon Account</button>
+                </Link>
+                
             </div>
         </div>
     )
