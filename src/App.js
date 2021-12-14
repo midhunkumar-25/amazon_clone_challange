@@ -69,7 +69,7 @@ function App() {
         {<Route path="/orders" element={<React.Fragment><Header /><Subheader/><Orders /></React.Fragment>}/>}
         {<Route path="/account" element={<React.Fragment><Header /><Subheader/><Account /></React.Fragment>}/>}
         {<Route path="/profile" element={<React.Fragment><Header /><Subheader/><Profile /></React.Fragment>}/>}
-        {<Route path="/register" element={<React.Fragment><Header /><Subheader/><Signup /></React.Fragment>}/>}
+        {<Route path="/register" element={<React.Fragment><Header /><Signup /></React.Fragment>}/>}
       </Routes>
       </div>
     </Router>
