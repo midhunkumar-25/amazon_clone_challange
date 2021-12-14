@@ -17,14 +17,20 @@ export default function Signup() {
         event.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
+            const user = auth.currentUser;
+            updateProfile(user, {
+                displayName: name
+              }).then(() => {
+                // Profile name updated!
+                console.log("Profile name updated!")
+              }).catch((error) => {
+                console.log(error)
+              });
+            // Signed up
             const user = userCredential.user;
             dispatch({
                 type:"ADD_USER",
-                item: {
-                    uid:user.uid,
-                    email: user.email,
-                  },
+                item: user,
             });
             // ...
         })
