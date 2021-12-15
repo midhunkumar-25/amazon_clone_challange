@@ -45,7 +45,7 @@ export default function Subheader() {
                             <div className="menucontainer">
                             <li className="menutile">help & settings</li>
                             <Link to="/account" style={{ textDecoration: 'none' }}>
-                            <li className="menutext">Your Account</li>
+                            <li className="menutext" onClick={()=>{setMenu(!menu)}}>Your Account</li>
                             </Link>
                             <li className="menutext" onClick={handleAuthenticaton}>{user? "Sign Out":"signin"}</li>
 

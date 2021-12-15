@@ -9,13 +9,14 @@ export default function Account() {
                 <h1>Your Account</h1> 
             </div>
             <div className='Account__card__container'>
+                
             <Link to="/orders" style={{ textDecoration: 'none' }}>
-            <Card sx={{ display: 'flex' ,width:"50%"}}>
+            <div className="grid__item">
+            <Card sx={{ maxWidth: 30,maxHeight:100,margin: "auto",transition: "0.3s",}}>
                 <Box sx={{ display: 'flex', flexDirection: 'row',alignItems: "center" }}>
                     <CardMedia
                         component="img"
-                        height="200"
-                        width="40"
+                        height="150"
                         image="https://images-na.ssl-images-amazon.com/images/G/31/x-locale/cs/ya/images/Box._CB485927553_.png"
                         alt=""
                     />
@@ -26,14 +27,15 @@ export default function Account() {
                     </CardContent>
                 </Box>
             </Card>
+            </div>
             </Link>
             <Link to="/profile" style={{ textDecoration: 'none' }}>
-            <Card sx={{ display: 'flex' ,width:"50%"}}>
+            <div className="grid__item">
+            <Card  sx={{ maxWidth: 300,margin: "auto",transition: "0.3s",}}>
                 <Box sx={{ display: 'flex', flexDirection: 'row',alignItems: "center" }}>
                     <CardMedia
                         component="img"
-                        height="200"
-                        width="10"
+ 
                         image="https://images-na.ssl-images-amazon.com/images/G/31/x-locale/cs/ya/images/sign-in-lock._CB485931504_.png"
                         alt=""
                     />
@@ -46,6 +48,30 @@ export default function Account() {
                     </CardContent>
                 </Box>
             </Card>
+            </div>
+            </Link>
+            <Link to="/address" style={{ textDecoration: 'none' }}>
+            <div className="grid__item">
+            <Card  sx={{ maxWidth: 300,margin: "auto",transition: "0.3s",}}>
+                <Box sx={{ display: 'flex', flexDirection: 'row',alignItems: "center" }}>
+                    <CardMedia
+                        component="img"
+ 
+                        image="https://images-na.ssl-images-amazon.com/images/G/31/x-locale/cs/ya/images/address-map-pin._CB485934183_.png"
+                        alt=""
+                    />
+                    <CardContent >
+                        <Typography gutterBottom variant="h5" component="div">
+      
+                
+                        Your Addresses
+            
+            
+                        </Typography>
+                    </CardContent>
+                </Box>
+            </Card>
+            </div>
             </Link>
             </div>
         </div>

@@ -22,6 +22,7 @@ import Account from './components/Account';
 import Subheader from './components/Subheader';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
+import Address from './components/Address';
 
 const promise = loadStripe(
   "pk_test_51K0LO4SGz5bkUNbUWbVdk8EcaeZAaY9l4cBHA5oWzGsCDfZN5YlAML66n7BvJ1pM0yB7J95UqFMJ86VPNUJVjmH000ghcsavBb"
@@ -70,6 +71,7 @@ function App() {
         {<Route path="/account" element={<React.Fragment><Header /><Subheader/><Account /></React.Fragment>}/>}
         {<Route path="/profile" element={<React.Fragment><Header /><Subheader/><Profile /></React.Fragment>}/>}
         {<Route path="/register" element={<React.Fragment><Header /><Signup /></React.Fragment>}/>}
+        {<Route path="/address" element={<React.Fragment><Header /><Address /></React.Fragment>}/>}
       </Routes>
       </div>
     </Router>

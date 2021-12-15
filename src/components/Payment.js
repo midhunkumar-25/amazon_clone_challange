@@ -8,7 +8,7 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../reducer";
 import axios from './axios';
 //import { db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc ,getDoc} from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore"
 const db = getFirestore();
 function Payment() {
@@ -17,7 +17,7 @@ function Payment() {
 
     const stripe = useStripe();
     const elements = useElements();
-
+    const [details, setDetails] = useState()
     const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
     const [error, setError] = useState(null);
@@ -36,6 +36,17 @@ function Payment() {
         }
 
         getClientSecret();
+
+        async function get_address(){
+            let docref = doc(db,"users",user?.uid)
+            const docSnap =  await getDoc(docref);
+            if (docSnap.exists()) {
+                docSnap.data()?.address && setDetails(docSnap.data()?.address) ;
+            } else {
+              console.log("No such document!");
+            }
+          }
+          get_address()
     }, [basket])
 
     console.log('THE SECRET IS >>>', clientSecret)
@@ -106,9 +117,13 @@ function Payment() {
                         <h3>Delivery Address</h3>
                     </div>
                     <div className='payment__address'>
-                        <p>{user?.email}</p>
-                        <p>123 React Lane</p>
-                        <p>Los Angeles, CA</p>
+                        <p>{details?.name}</p>
+                        <p>{details?.flat}</p>
+                        <p>{details?.street}</p>
+                        <p>{details?.landmark}</p>
+                        <p>{details?.city}</p>
+                        <p>{details?.pin}</p>
+                        <p>{details?.phone}</p>
                     </div>
                 </div>
 

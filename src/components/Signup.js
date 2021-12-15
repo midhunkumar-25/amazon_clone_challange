@@ -75,7 +75,7 @@ export default function Signup() {
                     <h5>Password</h5>
                     <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
 
-                    <button type='submit' className='signup__signInButton'>Continue</button>
+                    <button type='submit' className='signup__signInButton'>Create Account</button>
                 </form>
             </div>
         </div>
