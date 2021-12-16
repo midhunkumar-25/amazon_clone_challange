@@ -63,6 +63,9 @@ export default function Header() {
                 </button>
             </form>
             <div className='header__nav'>
+                <Link to='/'>
+                    <img className='header__logo_mobile' src="https://pngimg.com/uploads/amazon/amazon_PNG25.png"></img>
+                </Link>
                 <Link to= { !user && '/login'} style={{ textDecoration: 'none' }}>
                 <div className='header__option' onClick={handleAuthenticaton}>
                     

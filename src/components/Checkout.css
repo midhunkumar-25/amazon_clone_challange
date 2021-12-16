@@ -16,3 +16,8 @@ height: max-content;
     padding: 10px;
     border-bottom: 1px solid lightgray;
   }
+@media (max-width:900px) {
+    .checkout{
+        flex-direction: column;
+    }
+}
