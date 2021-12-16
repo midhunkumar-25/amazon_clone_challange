@@ -21,12 +21,14 @@ export default function Subheader() {
       }
     return (
         <div className='sub_header'>
-            < MenuOutlinedIcon fontSize="large"  className='subheader__Icon' onClick={()=>{setMenu(!menu)}}/>
+            < MenuOutlinedIcon fontSize="large"  className='subheader__Icon' onClick={()=>{setMenu(!menu);
+            document.documentElement.style.setProperty('--subheader-z',300);}}/>
             <div className={menu ? "menubar active" : "menubar"}>
             <div className='menuheader'>
                 <AccountCircleIcon fontSize="large"  className='subheader__Icon' onClick={()=>{setMenu(!menu)}}/>
                 <p>Hello, {!user ? 'Guest' : ( !user.displayName ? user.email : user.displayName ) }</p>
-                <CloseOutlinedIcon fontSize="large"  className='subheader__Icon' onClick={()=>{setMenu(!menu)}}/>
+                <CloseOutlinedIcon fontSize="large"  className='subheader__Icon' onClick={()=>{setMenu(!menu);
+                document.documentElement.style.setProperty('--subheader-z',100);}}/>
             </div>
             <div className='menubody'>
                 <ul className="menuitem">

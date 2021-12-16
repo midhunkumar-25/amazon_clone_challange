@@ -5,7 +5,7 @@
     align-items: center;
     background-color: #252e3b;
     top:0;
-    z-index: 300;
+    z-index: var(--subheader-z) ;
 }
 .subheader__Icon{
     cursor: pointer;
