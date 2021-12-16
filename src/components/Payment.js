@@ -12,12 +12,12 @@ import { doc, setDoc ,getDoc} from "firebase/firestore";
 import { getFirestore } from "firebase/firestore"
 const db = getFirestore();
 function Payment() {
-    const [{ basket, user }, dispatch] = useStateValue();
+    const [{ basket, user,address }, dispatch] = useStateValue();
     const navigate = useNavigate();
 
     const stripe = useStripe();
     const elements = useElements();
-    const [details, setDetails] = useState()
+    //const [details, setDetails] = useState()
     const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
     const [error, setError] = useState(null);
@@ -37,16 +37,6 @@ function Payment() {
 
         getClientSecret();
 
-        async function get_address(){
-            let docref = doc(db,"users",user?.uid)
-            const docSnap =  await getDoc(docref);
-            if (docSnap.exists()) {
-                docSnap.data()?.address && setDetails(docSnap.data()?.address) ;
-            } else {
-              console.log("No such document!");
-            }
-          }
-          get_address()
     }, [basket])
 
     console.log('THE SECRET IS >>>', clientSecret)
@@ -117,13 +107,13 @@ function Payment() {
                         <h3>Delivery Address</h3>
                     </div>
                     <div className='payment__address'>
-                        <p>{details?.name}</p>
-                        <p>{details?.flat}</p>
-                        <p>{details?.street}</p>
-                        <p>{details?.landmark}</p>
-                        <p>{details?.city}</p>
-                        <p>{details?.pin}</p>
-                        <p>{details?.phone}</p>
+                        <p>{address?.name}</p>
+                        <p>{address?.flat}</p>
+                        <p>{address?.street}</p>
+                        <p>{address?.landmark}</p>
+                        <p>{address?.city}</p>
+                        <p>{address?.pin}</p>
+                        <p>{address?.phone}</p>
                     </div>
                 </div>
 

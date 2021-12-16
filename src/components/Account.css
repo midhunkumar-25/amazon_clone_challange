@@ -7,6 +7,7 @@
     margin-top: 1rem;
 }
 .Account__card__container{
+    display: grid;
     margin: auto;
     margin-top: 1rem;
     grid-template-columns: auto auto auto;
@@ -14,5 +15,6 @@
     padding: 10px;
 }
 .grid__item{
+    resize: both;
     max-width: 20rem;
 }

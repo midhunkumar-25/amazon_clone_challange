@@ -5,7 +5,7 @@
     background-color: #131921;
     position: sticky;
     top:0;
-    z-index: 100;
+    z-index: 200;
 }
 .header__logo:hover{
     border-radius: 5px;
@@ -67,10 +67,10 @@
 }
 
 .header__line1{
-    font-size: 10px;
+    font-size: 0.8em;
 }
 .header__line2{
-    font-size: 13px;
+    font-size: 1em;
     font-weight: 800;
 }
 .header__optionBasket:hover{
@@ -84,6 +84,12 @@
     color: white;
 }
 .header__basketCount{
+    font-size: 1em;
     margin-left: 10px;
     margin-right: 10px;
+}
+.header__location{
+    padding: 5px;
+    display:flex;
+    color: white;
 }

@@ -1,7 +1,8 @@
 export const initialState = {
     basket: [],
     homeProducts:[],
-    user: null
+    user: null,
+    address:[],
   };
 
 // Selector
@@ -12,6 +13,16 @@ basket?.reduce((amount, item) => parseFloat((item.price.slice(1)).replace(",",""
 const reducer = (state, action) => {
     console.log(action);
     switch (action.type) {
+      case "ADD_ADDRESS":
+        return {
+            ...state,
+            address: action.item,
+          };
+      case "CLEAR_ADDRESS":
+        return {
+            ...state,
+            address: null,
+          };
       case "ADD_TO_BASKET":
         return {
             ...state,

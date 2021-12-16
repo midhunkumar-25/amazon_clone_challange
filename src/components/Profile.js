@@ -14,9 +14,9 @@ export default function Profile() {
     //const user = auth.currentUser;
     //console.log(user.displayName,user.email,user.phoneNumber,)
     const editMail=(event)=>{
-        let user = auth.currentUser;
+        let user_auth = auth.currentUser;
         event.preventDefault();
-        updateProfile(user, {
+        updateProfile(user_auth, {
             email: email
           }).then(() => {
             // Profile updated!
@@ -31,8 +31,8 @@ export default function Profile() {
     }
     const editName=(event)=>{
         event.preventDefault();
-        let user = auth.currentUser;
-        updateProfile(user, {
+        let user_auth = auth.currentUser;
+        updateProfile(user_auth, {
             displayName: name
           }).then(() => {
             // Profile updated!
@@ -43,6 +43,7 @@ export default function Profile() {
     }
     useEffect(() => {
       async function get_phone(){
+        if(user === null) return
         let docref = doc(db,"users",user?.uid)
         const docSnap =  await getDoc(docref);
         if (docSnap.exists()) {

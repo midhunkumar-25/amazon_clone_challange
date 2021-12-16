@@ -2,12 +2,14 @@ import React,{useState} from 'react'
 import './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { Link } from 'react-router-dom';
 import { useStateValue } from "../StateProvider";
 import axios from 'axios';
 import { auth } from "../firebase";
+
 export default function Header() {
-    const[{basket,user},dispatch] =useStateValue();
+    const[{basket,user,address},dispatch] =useStateValue();
     const [searchProduct, setsearchProduct] = useState("")
     const searchProducts= async (event)=>{
         event.preventDefault()
@@ -29,8 +31,7 @@ export default function Header() {
                       },
                 });
             }
-        })
-        
+        })     
     }
     const handleAuthenticaton = () => {
         if (user) {
@@ -43,6 +44,17 @@ export default function Header() {
             <Link to='/'>
             <img className='header__logo' src="https://pngimg.com/uploads/amazon/amazon_PNG25.png"></img>
             </Link>
+            <div className="header__location">
+                <LocationOnOutlinedIcon/>
+                <div className='header__option'>
+                    <span className='header__line1'>
+                    Deliver to {address?.name}
+                    </span>
+                    <span className='header__line2'>
+                    {address?.city} {address?.pin}
+                    </span>
+                </div>
+            </div>
             <form className='header__search' onSubmit={searchProducts}>
       
                 <input className='header__searchInput' type='text' onChange={e=> setsearchProduct(e.target.value)}/>
