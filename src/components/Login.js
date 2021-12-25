@@ -4,9 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword ,createUserWithEmailAndPassword } from "firebase/auth";
-
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
 function Login() {
-    const [{ user }, dispatch] = useStateValue();
+    //const [{ user }, dispatch] = useStateValue();
+    const user = useSelector((state) => state.user.user)
+    const dispatch = useDispatch()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -17,14 +20,7 @@ function Login() {
             // Signed in 
             const user = userCredential.user;
             console.log(user)
-            dispatch({
-                type:"ADD_USER",
-                item:user
-                /*item: {
-                    uid:user.uid,
-                    email: user.email,
-                  },*/
-            });
+            dispatch(adduser(user));
             navigate('/')
             // ...
           })

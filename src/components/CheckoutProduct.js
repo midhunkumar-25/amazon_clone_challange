@@ -1,13 +1,16 @@
 import React from 'react'
 import './CheckoutProduct.css';
 import { useStateValue } from "../StateProvider";
+import { useSelector, useDispatch } from 'react-redux';
+import {removefrombasket } from '../basketSlice';
+
 export default function CheckoutProduct({id,title,image,price,rating,hideButton}) {
-    const [{ basket }, dispatch] = useStateValue();
+    //const [{ basket }, dispatch] = useStateValue();
+    const basket = useSelector((state) => state.basket.basket)
+    const dispatch = useDispatch()
+
     const removeFromBasket=()=>{
-        dispatch({
-            type: 'REMOVE_FROM_BASKET',
-            id: id,
-        })
+        dispatch(removefrombasket({ id: id}))
     }
     return (
         <div className='checkoutProduct'>

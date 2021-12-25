@@ -7,9 +7,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile ,updatePhoneNumber } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc  } from "firebase/firestore"; 
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
+
 const db = getFirestore();
 export default function Signup() {
-    const [{ user }, dispatch] = useStateValue();
+    //const [{ user }, dispatch] = useStateValue();
+    const user = useSelector((state) => state.user.user)
+    const dispatch = useDispatch()
+  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState("")
@@ -31,10 +37,7 @@ export default function Signup() {
               setDoc(doc(db,"users",user_auth?.uid),{phoneNumber : phone})
             // Signed up
             let user = userCredential.user;
-            dispatch({
-                type:"ADD_USER",
-                item: user,
-            });
+            dispatch(adduser(user));
             // ...
             setName("")
             setPhone("")

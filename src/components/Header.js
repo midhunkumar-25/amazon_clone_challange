@@ -7,29 +7,34 @@ import { Link } from 'react-router-dom';
 import { useStateValue } from "../StateProvider";
 import axios from 'axios';
 import { auth } from "../firebase";
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
+import {addaddress,clearaddress } from '../addressSlice';
+import {addtobasket,removefrombasket,emptybasket} from '../basketSlice';
+import {addtohome,clearhome} from '../homeproductSlice';
 
 export default function Header() {
-    const[{basket,user,address},dispatch] =useStateValue();
+    //const[{basket,user,address},dispatch] =useStateValue();
+    const basket = useSelector((state) => state.basket.basket)
+    const user = useSelector((state) => state.user.user)
+    const address = useSelector((state) => state.address.address)
+    const dispatch = useDispatch()
+
     const [searchProduct, setsearchProduct] = useState("")
     const searchProducts= async (event)=>{
         event.preventDefault()
         await axios.get('https://amazon-india-product-api.herokuapp.com/search/?q='+searchProduct)
         .then((response)=> {
-            dispatch({
-                type:"CLEAR_HOME",
-            });
+            dispatch(clearhome());
             console.log(response)
             for (let prod of  response.data){
-                dispatch({
-                    type:"ADD_TO_HOME",
-                    item: {
-                        id: prod.id,
-                        title: prod.name,
-                        image: prod.image,
-                        price: prod.price,
-                        rating: prod.review.split(" ")[0],
-                      },
-                });
+                dispatch(addtohome({
+                    id: prod.id,
+                    title: prod.name,
+                    image: prod.image,
+                    price: prod.price,
+                    rating: prod.review.split(" ")[0],
+                  }));
             }
         })     
     }

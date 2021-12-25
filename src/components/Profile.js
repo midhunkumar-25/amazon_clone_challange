@@ -5,12 +5,15 @@ import "./Profile.css";
 import {useStateValue} from "../StateProvider";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc ,getDoc  } from "firebase/firestore"; 
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
 const db = getFirestore();
 export default function Profile() {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [name, setName] = useState("")
-    const[{user},dispatch] =useStateValue();
+    //const[{user},dispatch] =useStateValue();
+    const user = useSelector((state) => state.user.user)
     //const user = auth.currentUser;
     //console.log(user.displayName,user.email,user.phoneNumber,)
     const editMail=(event)=>{

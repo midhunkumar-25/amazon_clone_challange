@@ -3,9 +3,10 @@ import Subtotal from './Subtotal'
 import './Checkout.css';
 import { useStateValue } from "../StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
-
+import { useSelector, useDispatch } from 'react-redux';
 export default function Checkout() {
-    const [{ basket, user }, dispatch] = useStateValue();
+    //const [{ basket, user }, dispatch] = useStateValue();
+    const basket = useSelector((state) => state.basket.basket)
     return (
         <div className='checkout'>
             <div className='checkout_left'>

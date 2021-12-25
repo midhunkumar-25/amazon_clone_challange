@@ -6,8 +6,12 @@ import './Subheader.css';
 import { Link,useNavigate } from 'react-router-dom';
 import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
 export default function Subheader() {
-    const[{user},dispatch] =useStateValue();
+    //const[{user},dispatch] =useStateValue();
+    const user = useSelector((state) => state.user.user)
+
     const [menu, setMenu] = useState(false);
     const navigate = useNavigate();
     const handleAuthenticaton = () => {
