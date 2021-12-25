@@ -9,10 +9,17 @@ import { getBasketTotal } from "../reducer";
 import axios from './axios';
 //import { db } from "../firebase";
 import { doc, setDoc ,getDoc} from "firebase/firestore"; 
-import { getFirestore } from "firebase/firestore"
+import { getFirestore } from "firebase/firestore";
+import { useSelector, useDispatch } from 'react-redux';
+import {emptybasket } from '../basketSlice';
+
 const db = getFirestore();
 function Payment() {
-    const [{ basket, user,address }, dispatch] = useStateValue();
+    //const [{ basket, user,address }, dispatch] = useStateValue();
+    const user = useSelector((state) => state.user.user)
+    const basket = useSelector((state) => state.basket.basket)
+    const address = useSelector((state) => state.address.address)
+    const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const stripe = useStripe();
@@ -75,9 +82,7 @@ function Payment() {
             setError(null)
             setProcessing(false)
 
-            dispatch({
-                type: 'EMPTY_BASKET'
-            })
+            dispatch(emptybasket())
 
             navigate('/orders', { replace: true })
         })

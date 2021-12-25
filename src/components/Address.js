@@ -3,11 +3,14 @@ import "./Address.css";
 import {useStateValue} from "../StateProvider";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc ,getDoc  } from "firebase/firestore"; 
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from '../userSlice';
 const db = getFirestore();
 export default function Address() {
     const [details, setDetails] = useState({name:"",phone:"",pin:"",flat:"",street:"",landmark:"",city:"",country:""})
     const [countries, setcountries] = useState([])
-    const[{user},dispatch] =useStateValue();
+    //const[{user},dispatch] =useStateValue();
+    const user = useSelector((state) => state.user.user)
     const saveAddress=(event)=>{
         event.preventDefault();
        setDoc(doc(db,"users",user.uid),{address:details}, { merge: true }) 

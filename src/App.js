@@ -25,30 +25,29 @@ import Signup from './components/Signup';
 import Address from './components/Address';
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc ,getDoc  } from "firebase/firestore"; 
+import { useSelector, useDispatch } from 'react-redux';
+import {adduser,clearuser } from './userSlice';
+import {addaddress,clearaddress } from './addressSlice';
 const db = getFirestore();
 const promise = loadStripe(
   "pk_test_51K0LO4SGz5bkUNbUWbVdk8EcaeZAaY9l4cBHA5oWzGsCDfZN5YlAML66n7BvJ1pM0yB7J95UqFMJ86VPNUJVjmH000ghcsavBb"
 );
 
-
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  //const [{ user }, dispatch] = useStateValue();
+  const user = useSelector((state) => state.user.user)
+  const dispatch = useDispatch()
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch({
-          type:"ADD_USER",
-          item: user
-      });
+        dispatch(adduser(user));
       async function get_address(){
         let docref = doc(db,"users",user?.uid)
         const docSnap =  await getDoc(docref);
         if (docSnap.exists()) {
            if(docSnap.data()?.address !== null){
-            dispatch({
-              type:"ADD_ADDRESS",
-              item: docSnap.data()?.address
-          });
+            dispatch(addaddress(docSnap.data()?.address)); 
            } 
            console.log("address added")
         } else {
@@ -59,14 +58,9 @@ function App() {
       
       get_address()
       } else {
-        dispatch({
-          type: "ADD_USER",
-          item: null,
-        });
-        dispatch({
-          type: "CLEAR_ADDRESS",
-          item: null,
-        });
+        
+        dispatch(clearuser());
+        dispatch(clearaddress());
       }
     });
     
@@ -93,7 +87,7 @@ function App() {
         {<Route path="/orders" element={<React.Fragment><Header /><Subheader/><Orders /></React.Fragment>}/>}
         {<Route path="/account" element={<React.Fragment><Header /><Subheader/><Account /></React.Fragment>}/>}
         {<Route path="/profile" element={<React.Fragment><Header /><Subheader/><Profile /></React.Fragment>}/>}
-        {<Route path="/register" element={<React.Fragment><Header /><Signup /></React.Fragment>}/>}
+        <Route path="/register" element={<Signup />}/>
         {<Route path="/address" element={<React.Fragment><Header /><Address /></React.Fragment>}/>}
       </Routes>
       </div>

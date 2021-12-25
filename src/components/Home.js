@@ -2,31 +2,32 @@ import React,{useEffect,useState} from 'react'
 import './Home.css'
 import Product from './Product'
 import { useStateValue } from "../StateProvider";
-import { isIndexedDBAvailable } from '@firebase/util';
 import { Carousel,Spinner } from 'react-bootstrap';
 import axios from './axios';
+import { useSelector, useDispatch } from 'react-redux';
+import {addtohome,clearhome} from '../homeproductSlice';
+
 export default function Home() {
-    const [{ homeProducts }, dispatch] = useStateValue();
+
+    //const [{ homeProducts }, dispatch] = useStateValue();
+    const homeProducts = useSelector((state) => state.homeProducts.homeProducts)
+    const dispatch = useDispatch()
+
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         async function getDefaultProducts(){
             await axios.get('https://amazon-india-product-api.herokuapp.com/search/?q=samsung')
             .then((response)=> {
-                dispatch({
-                    type:"CLEAR_HOME",
-                });
+                dispatch(clearhome());
                 console.log(response)
                 for (let prod of  response.data){
-                    dispatch({
-                        type:"ADD_TO_HOME",
-                        item: {
-                            id: prod.id,
-                            title: prod.name,
-                            image: prod.image,
-                            price: prod.price,
-                            rating: prod.review.split(" ")[0],
-                          },
-                    });
+                    dispatch(addtohome({
+                        id: prod.id,
+                        title: prod.name,
+                        image: prod.image,
+                        price: prod.price,
+                        rating: prod.review.split(" ")[0],
+                      }))
                 }
                 setLoading(false)
             })
