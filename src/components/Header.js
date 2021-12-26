@@ -21,12 +21,32 @@ export default function Header() {
     const dispatch = useDispatch()
 
     const [searchProduct, setsearchProduct] = useState("")
+    const [suggestions, setSuggestions] = useState([])
+
+    const getSuggestions= async(event)=>{
+        await axios.get("https://completion.amazon.in/api/2017/suggestions?limit=11&prefix="+event.target.value+"&alias=aps&mid=A21TJRUUN4KGV")
+        .then((response)=>{
+            setSuggestions(response.data.suggestions)
+            setsearchProduct(event.target.value)
+        })
+    }
+
+    const debounce=(fn,delay)=>{
+        let timeout;
+        return function (...args){
+            if(timeout){
+                clearTimeout(timeout)
+            }
+            timeout =  setTimeout(()=>{fn(...args)},delay);
+        }
+    }
+
     const searchProducts= async (event)=>{
-        event.preventDefault()
+        if(typeof event !== typeof undefined)
+            event.preventDefault()
         await axios.get('https://amazon-india-product-api.herokuapp.com/search/?q='+searchProduct)
         .then((response)=> {
             dispatch(clearhome());
-            console.log(response)
             for (let prod of  response.data){
                 dispatch(addtohome({
                     id: prod.id,
@@ -60,13 +80,27 @@ export default function Header() {
                     </span>
                 </div>
             </div>
-            <form className='header__search' onSubmit={searchProducts}>
-      
-                <input className='header__searchInput' type='text' onChange={e=> setsearchProduct(e.target.value)}/>
-                <button className='header__searchButton' type="submit" >
-                <SearchIcon className='header__searchIcon'/>                
-                </button>
-            </form>
+
+            <div className='header__search'>
+                <form  className='header__searchForm' onSubmit={searchProducts}>
+                    <input className='header__searchInput' type='text' onChange={debounce((event) =>{getSuggestions(event)},700)}/>
+                    <button className='header__searchButton' type="submit" >
+                    <SearchIcon className='header__searchIcon'/>                
+                    </button>
+                </form>
+                <div className='header__search_result'>
+                {
+                    suggestions.map((item,index)=>{
+                        return(
+                            <div className='header__search_item' key={index} onClick={()=>{ setSuggestions([]);setsearchProduct(item.value);searchProducts()}}>
+                                {item.value}
+                            </div>
+                        )
+                    })
+                }
+                </div>
+                
+            </div>
             <div className='header__nav'>
                 <Link to='/'>
                     <img className='header__logo_mobile' src="https://pngimg.com/uploads/amazon/amazon_PNG25.png"></img>

@@ -21,17 +21,23 @@
 .header__search{
     display: flex;
     flex: 1;
+    width:100%;
     resize: both;
     align-items: center;
     border-radius: 24px;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-between;
 }
 .header__searchForm{
+    width:100%;
+    resize: both;
     display: flex;
     flex: 1;
-    resize: both;
     align-items: center;
     border-radius: 24px;
 }
+
 .header__searchInput{
     border-radius: 5px;
     resize: both;
@@ -55,6 +61,31 @@
 .header__searchIcon:hover{
 
     background-color: #ff9100;
+}
+.header__search_result{
+    margin-top: 40px;
+    width:100%;
+    z-index: 5000;
+    opacity: 1;
+    position: absolute;
+    background-color: white;
+    box-shadow: grey;
+    border: solid 1px grey;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.header__search_result  ::-webkit-scrollbar{
+display: none;
+}
+.header__search_item {
+    margin-left: 1em;
+    margin-top: 1em;
+    padding: auto;
+    background-color: white;
+    cursor: pointer;
+}
+.header__search_item :hover{
+    background-color: grey;
 }
 .header__nav{
     display: flex;
