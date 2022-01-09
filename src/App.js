@@ -1,4 +1,3 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Home from './components/Home';
@@ -28,6 +27,7 @@ import { doc, setDoc ,getDoc  } from "firebase/firestore";
 import { useSelector, useDispatch } from 'react-redux';
 import {adduser,clearuser } from './userSlice';
 import {addaddress,clearaddress } from './addressSlice';
+import Footer from './components/Footer';
 const db = getFirestore();
 const promise = loadStripe(
   "pk_test_51K0LO4SGz5bkUNbUWbVdk8EcaeZAaY9l4cBHA5oWzGsCDfZN5YlAML66n7BvJ1pM0yB7J95UqFMJ86VPNUJVjmH000ghcsavBb"
@@ -49,7 +49,7 @@ function App() {
            if(docSnap.data()?.address !== null){
             dispatch(addaddress(docSnap.data()?.address)); 
            } 
-           console.log("address added")
+           console.log("address added",docSnap.data()?.address)
         } else {
           console.log("No such document!");
         }
@@ -81,6 +81,7 @@ function App() {
                     <Header/>
                     <Subheader/>
                     <Home/>
+                    <Footer/>
                   </React.Fragment>} />
         <Route path="/login" element={<Login />}/>
         {<Route path="/payment" element={<React.Fragment> <Header /><Subheader/> <Elements stripe={promise}><Payment /></Elements></React.Fragment>}/>}
@@ -88,7 +89,7 @@ function App() {
         {<Route path="/account" element={<React.Fragment><Header /><Subheader/><Account /></React.Fragment>}/>}
         {<Route path="/profile" element={<React.Fragment><Header /><Subheader/><Profile /></React.Fragment>}/>}
         <Route path="/register" element={<Signup />}/>
-        {<Route path="/address" element={<React.Fragment><Header /><Address /></React.Fragment>}/>}
+        {<Route path="/address" element={<React.Fragment><Header /><Subheader/><Address /></React.Fragment>}/>}
       </Routes>
       </div>
     </Router>

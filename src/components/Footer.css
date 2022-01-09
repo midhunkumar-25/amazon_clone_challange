@@ -1,0 +1,15 @@
+.footer{
+    position: relative;
+    height:35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #252e3b;
+    bottom:0;
+    color: white;
+    cursor: pointer;
+}
+
+.footer:hover{
+    background-color: #2b394d;
+}

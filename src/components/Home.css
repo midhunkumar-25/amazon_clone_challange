@@ -7,7 +7,10 @@
     max-width: 1500px;
 }
 .home__load{
-    margin-left: 39 em;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
 }
 .home__row{
     display: flex;

@@ -19,7 +19,7 @@ export default function Home() {
             await axios.get('https://amazon-india-product-api.herokuapp.com/search/?q=samsung')
             .then((response)=> {
                 dispatch(clearhome());
-                console.log(response)
+                //console.log(response)
                 for (let prod of  response.data){
                     dispatch(addtohome({
                         id: prod.id,
@@ -64,10 +64,11 @@ export default function Home() {
         </Carousel>
         </div>
             {/*<img className='home__image' src='https://m.media-amazon.com/images/I/71soUSqwsCL._SX3000_.jpg'/>*/}
-            <div className='home__container'>
-                {
+            {
                     loading && (<div className='home__load'><Spinner animation="border" variant="warning" /></div>)
                 }
+            <div className='home__container'>
+
             {homeProducts.map((item,index) => (
                 <div className='home__row'>
                 <Product

@@ -29,3 +29,40 @@ margin-bottom: 10px;
     border-color: #a88734 #9c7e31 #846a29;
     color: #111;
 }
+.profile__modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: grey
+}
+.profile__modal__container{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    bottom: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2em;
+    animation: drop 500ms ease forwards;
+}
+.profile__modal__close{
+    display: flex;
+    justify-content: flex-end;
+    margin: 1em;
+}
+.profile__modal__content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em;
+    font-weight: bolder;
+}
+@keyframes drop {
+    0% {opacity: 0;}
+    70% {transform: translateY(10%);}
+    100% {transform: translateY(25%);opacity: 1;}
+}

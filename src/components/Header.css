@@ -68,24 +68,28 @@
     z-index: 5000;
     opacity: 1;
     position: absolute;
-    background-color: white;
+    background-color: #131921;
     box-shadow: grey;
     border: solid 1px grey;
     overflow: hidden;
     overflow-y: auto;
+    border-radius: 1em;
 }
 .header__search_result  ::-webkit-scrollbar{
 display: none;
 }
 .header__search_item {
-    margin-left: 1em;
-    margin-top: 1em;
-    padding: auto;
-    background-color: white;
+    font-weight: bold;
+    margin: .8em;
+    padding: .1em;
+    border-radius: .2em;
+    color: white;
+    background-color: #131921;
     cursor: pointer;
 }
-.header__search_item :hover{
-    background-color: grey;
+.header__search_item:hover{
+    color: #131921;
+    background-color: white;
 }
 .header__nav{
     display: flex;

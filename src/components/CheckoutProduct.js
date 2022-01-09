@@ -10,7 +10,7 @@ export default function CheckoutProduct({id,title,image,price,rating,hideButton}
     const dispatch = useDispatch()
 
     const removeFromBasket=()=>{
-        dispatch(removefrombasket({ id: id}))
+        dispatch(removefrombasket({ id : id}))
     }
     return (
         <div className='checkoutProduct'>

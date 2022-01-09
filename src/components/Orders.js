@@ -5,16 +5,24 @@ import { useStateValue } from "../StateProvider";
 import Order from './Order'
 import { doc, getDoc ,collection,query,getDocs,onSnapshot } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore";
+import { useSelector } from 'react-redux';
+import {  useNavigate } from "react-router-dom";
+
 const db = getFirestore();
 
 function Orders() {
-  const [{ basket, user }, dispatch] = useStateValue();
+  //const [{ basket, user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user)
   const [orders, setOrders] = useState([]);
   //const user = JSON.parse(localStorage.getItem("user")); 
 
 
   useEffect(() => {
-
+    if(user === null) {
+        navigate('/login')
+        return
+        }
     if(user) {
         console.log("user id",user?.uid)
         onSnapshot(collection(doc(db, 'users', user?.uid),"orders"),(snapshot)=>{ 

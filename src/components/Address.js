@@ -1,22 +1,38 @@
 import React,{useState,useEffect} from 'react'
 import "./Address.css";
+import {  useNavigate } from "react-router-dom";
 import {useStateValue} from "../StateProvider";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc ,getDoc  } from "firebase/firestore"; 
 import { useSelector, useDispatch } from 'react-redux';
-import {adduser,clearuser } from '../userSlice';
+import {addaddress} from '../addressSlice';
+import CloseIcon from '@mui/icons-material/Close';
 const db = getFirestore();
 export default function Address() {
+    const navigate = useNavigate();
+    const [modal, setModal] = useState(false)
     const [details, setDetails] = useState({name:"",phone:"",pin:"",flat:"",street:"",landmark:"",city:"",country:""})
     const [countries, setcountries] = useState([])
     //const[{user},dispatch] =useStateValue();
     const user = useSelector((state) => state.user.user)
+    const address = useSelector((state) => state.address.address)
+    const dispatch =useDispatch()
     const saveAddress=(event)=>{
-        event.preventDefault();
-       setDoc(doc(db,"users",user.uid),{address:details}, { merge: true }) 
+       event.preventDefault();
+       if(user == null)
+        {
+            navigate('/login')
+            return;
+        }
+       setDoc(doc(db,"users",user?.uid),{address:details}, { merge: true }) 
+       setModal(!modal);
+       dispatch(addaddress());
     }
     useEffect(() => {
-        if(user === null) return
+        if(user === null) {
+            navigate('/login')
+            return
+        }
         async function get_address(){
             let docref = doc(db,"users",user?.uid)
             const docSnap =  await getDoc(docref);
@@ -79,6 +95,18 @@ export default function Address() {
                 <button className='address__edit' type='submit'>save address</button>
             </form>
             </div>
+            {modal && 
+                <div className='address__modal'>
+                  <div className='address__modal__container'>
+                    <div className='address__modal__close'>
+                      <CloseIcon size="large"  onClick={()=>{setModal(!modal)}}/>
+                    </div>
+                    <div className='address__modal__content'>
+                      Delievery address updated!!
+                    </div>
+                  </div>
+                </div>
+            }
         </div>
     )
 }

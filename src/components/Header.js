@@ -88,7 +88,9 @@ export default function Header() {
                     <SearchIcon className='header__searchIcon'/>                
                     </button>
                 </form>
-                <div className='header__search_result'>
+                {
+                   suggestions &&  
+                   <div className='header__search_result'>
                 {
                     suggestions.map((item,index)=>{
                         return(
@@ -99,6 +101,8 @@ export default function Header() {
                     })
                 }
                 </div>
+                }
+                
                 
             </div>
             <div className='header__nav'>

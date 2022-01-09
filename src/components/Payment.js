@@ -46,8 +46,8 @@ function Payment() {
 
     }, [basket])
 
-    console.log('THE SECRET IS >>>', clientSecret)
-    console.log('👱', user?.uid)
+    //console.log('THE SECRET IS >>>', clientSecret)
+    //console.log('👱', user?.uid)
 
     const handleSubmit = async (event) => {
         // do all the fancy stripe stuff...

@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 export const addressSlice = createSlice({
   name: 'address',
   initialState: {
-    address: []
+    address: {}
   },
   reducers: {
     addaddress: (state, action) => {
-      state.address = [...state.address, action.payload]
+      state.address =  action.payload
     },
     clearaddress: (state, action) => {
-        state.address = []
+        state.address = {}
       },
   },
 })

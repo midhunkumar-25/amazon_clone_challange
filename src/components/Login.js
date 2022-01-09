@@ -6,6 +6,7 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword ,createUserWithEmailAndPassword } from "firebase/auth";
 import { useSelector, useDispatch } from 'react-redux';
 import {adduser,clearuser } from '../userSlice';
+
 function Login() {
     //const [{ user }, dispatch] = useStateValue();
     const user = useSelector((state) => state.user.user)
